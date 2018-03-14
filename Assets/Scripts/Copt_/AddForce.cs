@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class AddForce : MonoBehaviour {
 
-    public Vector3 velocity;
-
-
+    public float velocity;
+    
     private Rigidbody rb;
 
     private void Awake()
@@ -21,6 +20,6 @@ public class AddForce : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        rb.AddForce(velocity);
+        rb.AddForce(transform.forward * velocity);
 	}
 }

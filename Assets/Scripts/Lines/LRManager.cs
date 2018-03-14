@@ -19,10 +19,12 @@ public class LRManager : MonoBehaviour {
         Vector3 direction = lr.GetPosition(1) - lr.GetPosition(0);
         if (Physics.Raycast(lr.GetPosition(0), direction, out hit))
         {
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "Player" && hit.collider.isTrigger == false)
             {
                 hit.collider.gameObject.GetComponent<Ragdoll>().RagdollOn = true;
             }
+
+            lr.SetPosition(1, hit.point);
         }
 	}
 
