@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class Ragdoll : MonoBehaviour {
+public class Ragdoll : MonoBehaviour
+{
 
     private Animator animator = null;
     public List<Rigidbody> rigidbodies = new List<Rigidbody>();
@@ -16,7 +17,8 @@ public class Ragdoll : MonoBehaviour {
         mainCollider = GetComponent<Collider>();
     }
 
-    public bool RagdollOn {
+    public bool RagdollOn
+    {
         get { return !animator.enabled; }
         set
         {
@@ -29,17 +31,31 @@ public class Ragdoll : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         animator = GetComponent<Animator>();
 
         foreach (Rigidbody r in rigidbodies)
             r.isKinematic = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
-        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Wreck")
+        {
+            if (gameObject.tag != "Player")
+            {
+                RagdollOn = true;
+
+            }
+        }
+    }
 }
